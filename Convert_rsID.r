@@ -101,32 +101,28 @@ colnames(SNPS_chr24_38) <- c("variant_id","chr_38","pos_38","location_38","locat
 
 SNPS_38=rbind(SNPS_chr1_38,SNPS_chr2_38,SNPS_chr3_38,SNPS_chr4_38,SNPS_chr5_38,SNPS_chr6_38,SNPS_chr7_38,SNPS_chr8_38,SNPS_chr9_38,SNPS_chr10_38,SNPS_chr11_38,SNPS_chr12_38,SNPS_chr13_38,SNPS_chr14_38,SNPS_chr15_38,SNPS_chr16_38,SNPS_chr17_38,SNPS_chr18_38,SNPS_chr19_38,SNPS_chr20_38,SNPS_chr21_38,SNPS_chr22_38,SNPS_chr23_38,SNPS_chr24_38)
 
+save(SNPS_38,file = "/scratch/ys98038/UKB/plink2_format/COVID_19/Analyses/SNP/SNPS_38_include_XY.RData")
+
 Trait$location_38=paste(Trait$V1,":",Trait$V4, sep="")
 
 Trait <- Trait %>% left_join(SNPS_38, by= "location_38")
 
-len_exp_file=length(Trait$V1)
-for (e in 1:len_exp_file) {
-  if (Trait$V1[e]<23) {
-    if (is.na(Trait$variant_id[e])==TRUE) {
-      write.table(paste(Trait$V1,Trait$V4, sep=":"), file= "/scratch/ys98038/UKB/plink2_format/Imputation/Strand_Alignment/Missing_SNP.txt", append = TRUE, row.names = FALSE,col.names = FALSE, quote = FALSE, sep='\t')
-    }
-    Trait$new_variant_id[e]=ifelse(is.na(Trait$variant_id[e])==TRUE,paste(Trait$V1,":",Trait$V4, sep=""),Trait$variant_id[e])
-  } else if (Trait$V1[e]==23) {
-    if (is.na(Trait$variant_id[e])==TRUE) {
-      write.table(paste(Trait$V1,Trait$V4, sep=":"), file= "/scratch/ys98038/UKB/plink2_format/Imputation/Strand_Alignment/Missing_SNP.txt", append = TRUE, row.names = FALSE,col.names = FALSE, quote = FALSE, sep='\t')
-    }
-    Trait$new_variant_id[e]=ifelse(is.na(Trait$variant_id[e])==TRUE,paste("X",":",Trait$V4, sep=""),Trait$variant_id[e])
-  } else if (Trait$V1[e]==24) {
-    if (is.na(Trait$variant_id[e])==TRUE) {
-      write.table(paste(Trait$V1,Trait$V4, sep=":"), file= "/scratch/ys98038/UKB/plink2_format/Imputation/Strand_Alignment/Missing_SNP.txt", append = TRUE, row.names = FALSE,col.names = FALSE, quote = FALSE, sep='\t')
-    }
-    Trait$new_variant_id[e]=ifelse(is.na(Trait$variant_id[e])==TRUE,paste("Y",":",Trait$V4, sep=""),Trait$variant_id[e])
-  }
-}
+Trait$XY_chr1=ifelse(Trait$V1==23, "X", Trait$V1 )
+Trait$XY_chr=ifelse(Trait$V1==24, "Y", Trait$XY_chr1 )
+
+Trait$new_variant_id=ifelse(is.na(Trait$variant_id)==TRUE, paste(Trait$XY_chr,Trait$V4, sep=":"), Trait$variant_id)
+
+Trait$id.exposure_1=sapply(strsplit(Trait$new_variant_id, split= ":", fixed=TRUE),"[",1)
+Trait$id.exposure_2=sapply(strsplit(Trait$new_variant_id, split= ":", fixed=TRUE),"[",2)
+Trait$id.exposure_2=as.numeric(Trait$id.exposure_2)
+
+Trait1=Trait[is.na(Trait$id.exposure_2)==F,]
 
 Trait<-Trait%>%select(V1, new_variant_id, trait, V3, V4, V5, V6)
 
+Trait1<-Trait1%>%select(new_variant_id)
+
 write.table(Trait, file= "/scratch/ys98038/UKB/plink2_format/Imputation/Strand_Alignment/Gibbons_Project.StrandAligned.rsID_Updated.bim", append = TRUE, row.names = FALSE,col.names = FALSE, quote = FALSE, sep='\t')
 
-  
+write.table(Trait1, file= "/scratch/ys98038/UKB/plink2_format/Imputation/Strand_Alignment/Missing_SNP.txt", append = TRUE, row.names = FALSE,col.names = FALSE, quote = FALSE, sep='\t')
+

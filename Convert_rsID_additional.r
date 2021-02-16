@@ -36,6 +36,8 @@ Trait6=rbind(Trait3,Trait5)
 
 Trait7 <- Trait6[order(Trait6$chr_38, Trait6$location_38),]
 
+Trait7<-Trait7%>%select(V1, V2,  V3, V4, V5, V6)
+
 write.table(Trait7, file= "/scratch/ys98038/UKB/plink2_format/Imputation/Strand_Alignment/Gibbons_Project.StrandAligned.rsID_Updated.bim", append = TRUE, row.names = FALSE,col.names = FALSE, quote = FALSE, sep='\t')
 
 

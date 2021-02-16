@@ -118,7 +118,7 @@ Trait$id.exposure_2=as.numeric(Trait$id.exposure_2)
 
 Trait1=Trait[is.na(Trait$id.exposure_2)==F,]
 
-Trait<-Trait%>%select(V1, new_variant_id, trait, V3, V4, V5, V6)
+Trait<-Trait%>%select(V1, new_variant_id,  V3, V4, V5, V6)
 
 Trait1<-Trait1%>%select(new_variant_id)
 

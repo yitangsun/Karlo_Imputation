@@ -36,13 +36,13 @@ plink2 --bfile Gibbons_Project.StrandAligned.rsID_Updated --chr 19 --recode vcf 
 plink2 --bfile Gibbons_Project.StrandAligned.rsID_Updated --chr 20 --recode vcf --out chr20_Gibbons_Project.StrandAligned.rsID_Updated
 plink2 --bfile Gibbons_Project.StrandAligned.rsID_Updated --chr 21 --recode vcf --out chr21_Gibbons_Project.StrandAligned.rsID_Updated
 plink2 --bfile Gibbons_Project.StrandAligned.rsID_Updated --chr 22 --recode vcf --out chr22_Gibbons_Project.StrandAligned.rsID_Updated
-plink2 --bfile Gibbons_Project.StrandAligned.rsID_Updated --chr X --recode vcf --out chr23_Gibbons_Project.StrandAligned.rsID_Updated
-plink2 --bfile Gibbons_Project.StrandAligned.rsID_Updated --chr Y --recode vcf --out chr24_Gibbons_Project.StrandAligned.rsID_Updated
+plink2 --bfile Gibbons_Project.StrandAligned.rsID_Updated --chr X --recode vcf --out chrX_Gibbons_Project.StrandAligned.rsID_Updated
+plink2 --bfile Gibbons_Project.StrandAligned.rsID_Updated --chr Y --recode vcf --out chrY_Gibbons_Project.StrandAligned.rsID_Updated
 
 
 
 
-
+#for i in {1..22} X Y MT
 #chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
 
 #plink2 --bfile Gibbons_Project.StrandAligned.rsID_Updated --chr $chr --recode vcf --out chr$chrGibbons_Project.StrandAligned.rsID_Updated

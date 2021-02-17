@@ -121,7 +121,7 @@ Trait$id.exposure_2=as.numeric(Trait$id.exposure_2)
 
 Trait1=Trait[is.na(Trait$id.exposure_2)==F,]
 
-Trait$id.exposure_3=ifelse(is.na(Trait$variant_id)==TRUE, ".", sep=":"), Trait$variant_id)
+Trait$id.exposure_3=ifelse(is.na(Trait$variant_id)==TRUE, ".",  Trait$variant_id)
 
 Trait<-Trait%>%select(V1, id.exposure_3,  V3, V4, V5, V6)
 

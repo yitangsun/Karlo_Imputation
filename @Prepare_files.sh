@@ -473,7 +473,7 @@ module load PLINK/1.9b_6-24-x86_64
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/W8_H5-H8_Top_GDAD2_NCBI_38
 
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/update_build.sh \
-/scratch/ys98038/genotype20221007/Top_strand/ W8_A9-H12_Top/Top_strand \
+/scratch/ys98038/genotype20221007/Top_strand/W8_A9-H12_Top/Top_strand \
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/GDA-8v1-0_D2-b38.strand \
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/W8_A9-H12_Top_GDAD2_NCBI_38
 

@@ -68,5 +68,3 @@ for (Pathway_out in c("/scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_
 head(Comparison,50)
 
 
-
-

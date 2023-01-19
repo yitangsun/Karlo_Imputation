@@ -17,7 +17,7 @@ chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
 # cd $SLURM_SUBMIT_DIR
 cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/W8_A1-H4/
   
-  ################## Convert to bfiles ##################
+################## Convert to bfiles ##################
 plink \
 --file PLINK_GenomeStudio \
 --make-bed \
@@ -25,7 +25,7 @@ plink \
 
 cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/W8_A9-H12/
   
-  ################## Convert to bfiles ##################
+################## Convert to bfiles ##################
 plink \
 --file PLINK_GenomeStudio \
 --make-bed \
@@ -33,7 +33,7 @@ plink \
 
 cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/W8_H5-H8/
   
-  ################## Convert to bfiles ##################
+################## Convert to bfiles ##################
 plink \
 --file PLINK_GenomeStudio \
 --make-bed \
@@ -41,7 +41,7 @@ plink \
 
 cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/W8_Philibert_Project_011/
   
-  ################## Convert to bfiles ##################
+################## Convert to bfiles ##################
 plink \
 --file PLINK_GenomeStudio \
 --make-bed \
@@ -49,7 +49,7 @@ plink \
 
 cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/W5_Philibert2_Project_006/
   
-  ################## Convert to bfiles ##################
+################## Convert to bfiles ##################
 plink \
 --file PLINK_GenomeStudio \
 --make-bed \
@@ -81,7 +81,7 @@ unzip GDA_PGx-8v1-0_20042614_A1-b37-strand.zip
 wget https://www.strand.org.uk/update_build.sh
 
 chmod 777 update_build*
-
+  
 mkdir Strand
 
 #!/bin/bash
@@ -101,7 +101,7 @@ module load PLINK/1.9b_6-24-x86_64
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/W5_Philibert2_Project_006/PLINK_GenomeStudio \
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/GDA-8v1-0_A1-b37.strand \
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/W5_Philibert2_Project_006_Forward_A1
-  
+
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/update_build.sh \
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/W5_Philibert2_Project_006/PLINK_GenomeStudio \
 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/GDA-8v1-0_D1-b37.strand\
@@ -142,7 +142,7 @@ ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 
 # cd $SLURM_SUBMIT_DIR
 cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/
-
+  
 #chr
 chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
 
@@ -295,7 +295,7 @@ mv *.gz gz_files/top/
   
 mkdir gz_files
 mv *.gz gz_files/
-
+  
 ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 
 # cd $SLURM_SUBMIT_DIR
@@ -486,7 +486,7 @@ ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 
 # cd $SLURM_SUBMIT_DIR
 cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/
-  
+
 #chr
 chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
 
@@ -540,7 +540,7 @@ done
 # awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' all_phase3.pvar > all_hg37_snps.pvar
 mkdir backup_vcf 
 cp *Top* backup_vcf/
-
+  
 for i in ${chr[@]}
 do
 awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".vcf > W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".test.vcf
@@ -632,7 +632,6 @@ plink2 --zst-decompress all_hg38.pvar.zst > all_hg38.pvar
 plink2 --zst-decompress all_phase3.pgen.zst > all_phase3.pgen
 plink2 --zst-decompress all_phase3.pvar.zst > all_phase3.pvar
 
-
 #cd /project/kylab/lab_shared/CFR_UGA_Sociology/genotype/Strand_Alignment
 
 #bcftools sort Gibbons_Project.StrandAligned.rsID_Updated.vcf -Oz -o Gibbons_Project.StrandAligned.rsID_Updated.vcf.gz
@@ -661,7 +660,7 @@ chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
 
 # cd $SLURM_SUBMIT_DIR
 cd /scratch/ys98038/genotype20221007/Top_strand/W8_A1-H4_Top/
-
+  
 ################## Convert to bfiles ##################
 plink \
 --file Top_strand \
@@ -699,8 +698,6 @@ plink \
 --file Top_strand \
 --make-bed \
 --out Top_strand
-
-
 
 ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 
@@ -755,7 +752,7 @@ done
 
 cd /scratch/ys98038/genotype20221007/Top_strand/W5_Philibert2_Project_006_Top/
   
-  ################## Convert to vcf ##################
+################## Convert to vcf ##################
 for i in ${chr[@]}
 do
 plink2 \
@@ -783,9 +780,12 @@ done
 #SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
 
 cd /scratch/ys98038/genotype20221007/
-mkdir Imputation\ results/
-cd Imputation\ results/
+# mkdir Imputation\ results/
+# cd Imputation\ results/
   
+mkdir Genotype_20230119
+cd Genotype_20230119
+
 mkdir W8_H5-H8_Top_GDAD2_NCBI_38
 cd W8_H5-H8_Top_GDAD2_NCBI_38
 wget https://imputation.biodatacatalyst.nhlbi.nih.gov/share/results/95c02faa2709617e29be2a4551f842dc333778f6d52cf1c8e6aa8da2152dd70c/qcreport.html
@@ -828,57 +828,82 @@ ml  UnZip/6.0-GCCcore-11.2.0
 #chr
 chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
 
-cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_A1-H4_Top_GDAD2_NCBI_38/
-
+cd /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A1-H4_Top_GDAD2_NCBI_38/
+  
 for i in ${chr[@]}
 do
-unzip -P UO2sNlf9UydZW8 /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_A1-H4_Top_GDAD2_NCBI_38/chr_"$i".zip
+unzip -P UO2sNlf9UydZW8 /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A1-H4_Top_GDAD2_NCBI_38/chr_"$i".zip
 done
 
 # W8_A1-H4_Top_GDAD2_NCBI_38
 # UO2sNlf9UydZW8
 
-cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/
-
+cd /scratch/ys98038/genotype20221007/Genotype_20230119/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/
+  
 for i in ${chr[@]}
 do
-unzip -P GWfhCWK1noXc5S  /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/chr_"$i".zip
+unzip -P GWfhCWK1noXc5S  /scratch/ys98038/genotype20221007/Genotype_20230119/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/chr_"$i".zip
 done
 
 # W8_Philibert_Project_011_Top_GDAD2_NCBI_37
 # GWfhCWK1noXc5S
 
-cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/
-
+cd /scratch/ys98038/genotype20221007/Genotype_20230119/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/
+  
 for i in ${chr[@]}
 do
-unzip -P "8M6xO(jxcRkGL{"  /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/chr_"$i".zip
+unzip -P "8M6xO(jxcRkGL{"  /scratch/ys98038/genotype20221007/Genotype_20230119/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/chr_"$i".zip
 done
 
 # W5_Philibert2_Project_006_Top_GDAD2_NCBI_37
 # 8M6xO(jxcRkGL{
 
-cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_A9-H12_Top_GDAD2_NCBI_38/
-
+cd /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A9-H12_Top_GDAD2_NCBI_38/
+  
 for i in ${chr[@]}
 do
-unzip -P "gQWzj-J0Cbp9pA"  /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_A9-H12_Top_GDAD2_NCBI_38/chr_"$i".zip
+unzip -P "gQWzj-J0Cbp9pA"  /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A9-H12_Top_GDAD2_NCBI_38/chr_"$i".zip
 done
 
 # W8_A9-H12_Top_GDAD2_NCBI_38
 # gQWzj-J0Cbp9pA
 
-cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_H5-H8_Top_GDAD2_NCBI_38/
-
+cd /scratch/ys98038/genotype20221007/Genotype_20230119/W8_H5-H8_Top_GDAD2_NCBI_38/
+  
 for i in ${chr[@]}
 do
-unzip -P Sey9FKONQip5rx  /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_H5-H8_Top_GDAD2_NCBI_38/chr_"$i".zip
+unzip -P Sey9FKONQip5rx  /scratch/ys98038/genotype20221007/Genotype_20230119/W8_H5-H8_Top_GDAD2_NCBI_38/chr_"$i".zip
 done
 
 # W8_H5-H8_Top_GDAD2_NCBI_38
 # Sey9FKONQip5rx
 
+cd /scratch/ys98038/genotype20221007/Imputation\ results/
+gunzip */*gz
+
 ####################################################  @@@@@@@@@  Final ! ####################################################
 ####################################################  @@@@@@@@@  Final ! ####################################################
 ####################################################  @@@@@@@@@  Final ! ####################################################
+
+####### Give rsID
+# dbSNP build 155 release notes
+# Organism name: Homo sapiens
+# Taxonomy ID: 9606
+# https://ftp.ncbi.nlm.nih.gov/snp/
+# https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/
+# /JSON              RefSNP JSON files. Refer to JSON_README.txt for details.
+# /VCF               RefSNP VCF files for GRC (Genome Reference Consortium) human assembly
+# 37 (GCF_000001405.25) and 38 (GCF_000001405.39). Files are compressed
+# by bgzip and with the tabix index.
+cd /scratch/ys98038/genotype20221007/Imputation\ results/
+
+mkdir dbSNP_38_build_155
+cd dbSNP_38_build_155
+
+wget https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/GCF_000001405.39.gz
+wget https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/GCF_000001405.39.gz.md5
+wget https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/GCF_000001405.39.gz.tbi
+wget https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/GCF_000001405.39.gz.tbi.md5
+
+# gunzip GCF_000001405.39.gz
 

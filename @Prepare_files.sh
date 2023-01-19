@@ -536,6 +536,26 @@ plink2 \
 --out W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i"
 done
 
+# Change chr*
+# awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' all_phase3.pvar > all_hg37_snps.pvar
+mkdir backup_vcf 
+cp *Top* backup_vcf/
+
+for i in ${chr[@]}
+do
+awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".vcf > W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".test.vcf
+done
+
+for i in ${chr[@]}
+do
+awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".vcf > W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".test.vcf
+done
+
+for i in ${chr[@]}
+do
+awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".vcf > W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".test.vcf
+done
+
 #### gz files
 ml tabix/0.2.6-GCCcore-8.3.0
 
@@ -551,7 +571,7 @@ for i in ${chr[@]}
 do
 bgzip  \
 -c  \
-W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".vcf > \
+W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".test.vcf > \
 W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".vcf.gz
 done
 
@@ -559,7 +579,7 @@ for i in ${chr[@]}
 do
 bgzip  \
 -c  \
-W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".vcf > \
+W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".test.vcf > \
 W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".vcf.gz
 done
 
@@ -567,7 +587,7 @@ for i in ${chr[@]}
 do
 bgzip  \
 -c  \
-W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".vcf > \
+W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".test.vcf > \
 W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".vcf.gz
 done
 
@@ -745,4 +765,55 @@ plink2 \
 --out /scratch/ys98038/genotype20221007/Top_strand/VCF_files/W5_Philibert2_Project_006_chr"$i"
 done
 
+####################################################  @@@@@@@@@  Final ! ####################################################
+####################################################  @@@@@@@@@  Final ! ####################################################
+####################################################  @@@@@@@@@  Final ! ####################################################
+ml  UnZip/6.0-GCCcore-11.2.0
+
+#chr
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+
+for i in ${chr[@]}
+do
+unzip /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_A1-H4_Top_GDAD2_NCBI_38/chr_"$i".zip
+done
+
+# W8_A1-H4_Top_GDAD2_NCBI_38
+# UO2sNlf9UydZW8
+
+for i in ${chr[@]}
+do
+unzip /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/chr_"$i".zip
+done
+
+# W8_Philibert_Project_011_Top_GDAD2_NCBI_37
+# GWfhCWK1noXc5S
+
+for i in ${chr[@]}
+do
+unzip /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/chr_"$i".zip
+done
+
+# W5_Philibert2_Project_006_Top_GDAD2_NCBI_37
+# 8M6xO(jxcRkGL{
+
+for i in ${chr[@]}
+do
+unzip /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_A9-H12_Top_GDAD2_NCBI_38/chr_"$i".zip
+done
+
+# W8_A9-H12_Top_GDAD2_NCBI_38
+# gQWzj-J0Cbp9pA
+
+for i in ${chr[@]}
+do
+unzip /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Imputation\ results/W8_H5-H8_Top_GDAD2_NCBI_38/chr_"$i".zip
+done
+
+# W8_H5-H8_Top_GDAD2_NCBI_38
+# Sey9FKONQip5rx
+
+####################################################  @@@@@@@@@  Final ! ####################################################
+####################################################  @@@@@@@@@  Final ! ####################################################
+####################################################  @@@@@@@@@  Final ! ####################################################
 

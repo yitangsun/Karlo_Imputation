@@ -439,7 +439,6 @@ tabix  \
 W8_Philibert_Project_011_chr"$i".vcf.gz
 done
 
-
 ####################################################  @@@@@@@@@  Final ! ####################################################
 ####################################################  @@@@@@@@@  Final ! ####################################################
 ####################################################  @@@@@@@@@  Final ! ####################################################
@@ -486,9 +485,9 @@ ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 
 # cd $SLURM_SUBMIT_DIR
 cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/
-  
+
 #chr
-chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 XY)
 
 ################## Convert to vcf ################## Top
 for i in ${chr[@]}
@@ -540,7 +539,186 @@ done
 # awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' all_phase3.pvar > all_hg37_snps.pvar
 mkdir backup_vcf
 cp *Top* backup_vcf/
-  
+
+for i in ${chr[@]}
+do
+awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' VCF42_W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".vcf > VCF42_W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".test.vcf
+done
+
+for i in ${chr[@]}
+do
+awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' VCF42_W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".vcf > VCF42_W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".test.vcf
+done
+
+for i in ${chr[@]}
+do
+awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' VCF42_W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".vcf > VCF42_W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".test.vcf
+done
+
+#### gz files
+ml tabix/0.2.6-GCCcore-8.3.0
+
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+VCF42_W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".vcf > \
+VCF42_W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".vcf.gz
+done
+
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+VCF42_W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".test.vcf > \
+VCF42_W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".vcf.gz
+done
+
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+VCF42_W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".test.vcf > \
+VCF42_W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".vcf.gz
+done
+
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+VCF42_W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".test.vcf > \
+VCF42_W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".vcf.gz
+done
+
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+VCF42_W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i".vcf > \
+VCF42_W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i".vcf.gz
+done
+
+mkdir gz_files/top/VCF42_prepare_vcf_gz_011823
+mv *.gz gz_files/top/VCF42_prepare_vcf_gz_011823
+
+####### Chr X
+####### Chr X
+####### Chr X
+####### Chr X
+
+# rm /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/V*X.*
+# rm /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/backup_vcf/V*X.*
+# rm /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/VCF42_prepare_vcf_gz_011823/V*X.*
+
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+# cd $SLURM_SUBMIT_DIR
+cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/
+
+#chr
+chr=(X)
+
+################## Convert to vcf ################## Top
+for i in ${chr[@]}
+do
+plink2 \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37 \
+--chr "$i" \
+--set-hh-missing \
+--make-bed \
+--out VCF42_W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile VCF42_W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--chr "$i" \
+--recode vcf-4.2 \
+--out VCF42_W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile W8_A1-H4_Top_GDAD2_NCBI_38 \
+--chr "$i" \
+--set-hh-missing \
+--make-bed \
+--out VCF42_W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile VCF42_W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i" \
+--chr "$i" \
+--recode vcf-4.2 \
+--out VCF42_W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile W8_H5-H8_Top_GDAD2_NCBI_38 \
+--chr "$i" \
+--set-hh-missing \
+--make-bed \
+--out VCF42_W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile VCF42_W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i" \
+--chr "$i" \
+--recode vcf-4.2 \
+--out VCF42_W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile W8_A9-H12_Top_GDAD2_NCBI_38 \
+--chr "$i" \
+--set-hh-missing \
+--make-bed \
+--out VCF42_W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile VCF42_W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i" \
+--chr "$i" \
+--recode vcf-4.2 \
+--out VCF42_W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile W8_Philibert_Project_011_Top_GDAD2_NCBI_37 \
+--chr "$i" \
+--set-hh-missing \
+--make-bed \
+--out VCF42_W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile VCF42_W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i" \
+--chr "$i" \
+--recode vcf-4.2 \
+--out VCF42_W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+# Change chr*
+# awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' all_phase3.pvar > all_hg37_snps.pvar
+mkdir backup_vcf
+cp *Top* backup_vcf/
+
 for i in ${chr[@]}
 do
 awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' VCF42_W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".vcf > VCF42_W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".test.vcf
@@ -686,7 +864,7 @@ ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/Strand_Alignment
 
 #chr
-chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 XY)
 
 ################## Convert to vcf ################## Top
 for i in ${chr[@]}
@@ -701,9 +879,70 @@ done
 # Change chr*
 # awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' all_phase3.pvar > all_hg37_snps.pvar
 mkdir Gibbons_backup_vcf 
-cp *Gibbons* backup_vcf/
-  
-  for i in ${chr[@]}
+cp *Gibbons* Gibbons_backup_vcf/
+
+for i in ${chr[@]}
+do
+awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' VCF42_Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".vcf > VCF42_Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".test.vcf
+done
+
+#### gz files
+ml tabix/0.2.6-GCCcore-8.3.0
+
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+VCF42_Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".test.vcf > \
+VCF42_Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".vcf.gz
+done
+
+# mkdir VCF42_prepare_vcf_gz_011823
+mv *.gz ../gz_files/top/VCF42_prepare_vcf_gz_011823
+
+####### Chr X
+####### Chr X
+####### Chr X
+####### Chr X
+
+# rm /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/Strand_Alignment/*X.*
+# rm /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/Strand_Alignment/Gibbons_backup_vcf/*X.*
+# rm ../gz_files/top/VCF42_prepare_vcf_gz_011823/*Gibbons*X.*
+
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+# cd $SLURM_SUBMIT_DIR
+cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/Strand_Alignment
+
+#chr
+chr=(X)
+
+################## Convert to vcf ################## Top
+for i in ${chr[@]}
+do
+plink2 \
+--bfile Gibbons_Project.StrandAligned.rsID_Updated \
+--chr "$i" \
+--set-hh-missing \
+--make-bed \
+--out VCF42_Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile VCF42_Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i" \
+--chr "$i" \
+--recode vcf-4.2 \
+--out VCF42_Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i"
+done
+
+# Change chr*
+# awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' all_phase3.pvar > all_hg37_snps.pvar
+# mkdir Gibbons_backup_vcf 
+cp *Gibbons* Gibbons_backup_vcf/
+
+for i in ${chr[@]}
 do
 awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' VCF42_Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".vcf > VCF42_Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".test.vcf
 done

@@ -1021,7 +1021,7 @@ chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
 
 # cd $SLURM_SUBMIT_DIR
 cd /scratch/ys98038/genotype20221007/Top_strand/W8_A1-H4_Top/
-  
+
 ################## Convert to bfiles ##################
 plink \
 --file Top_strand \
@@ -1029,7 +1029,7 @@ plink \
 --out Top_strand
 
 cd /scratch/ys98038/genotype20221007/Top_strand/W8_A9-H12_Top/
-  
+
 ################## Convert to bfiles ##################
 plink \
 --file Top_strand \
@@ -1037,7 +1037,7 @@ plink \
 --out Top_strand
 
 cd /scratch/ys98038/genotype20221007/Top_strand/W8_H5-H8_Top/
-  
+
 ################## Convert to bfiles ##################
 plink \
 --file Top_strand \
@@ -1045,7 +1045,7 @@ plink \
 --out Top_strand
 
 cd /scratch/ys98038/genotype20221007/Top_strand/W8_Philibert_Project_011_Top/
-  
+
 ################## Convert to bfiles ##################
 plink \
 --file Top_strand \
@@ -1053,7 +1053,7 @@ plink \
 --out Top_strand
 
 cd /scratch/ys98038/genotype20221007/Top_strand/W5_Philibert2_Project_006_Top/
-  
+
 ################## Convert to bfiles ##################
 plink \
 --file Top_strand \
@@ -1064,7 +1064,7 @@ ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 
 # cd $SLURM_SUBMIT_DIR
 cd /scratch/ys98038/genotype20221007/Top_strand/W8_A1-H4_Top/
-  
+
 ################## Convert to vcf ##################
 for i in ${chr[@]}
 do
@@ -1076,7 +1076,7 @@ plink2 \
 done
 
 cd /scratch/ys98038/genotype20221007/Top_strand/W8_A9-H12_Top/
-  
+
 ################## Convert to vcf ##################
 for i in ${chr[@]}
 do
@@ -1088,7 +1088,7 @@ plink2 \
 done
 
 cd /scratch/ys98038/genotype20221007/Top_strand/W8_H5-H8_Top/
-  
+
 ################## Convert to vcf ##################
 for i in ${chr[@]}
 do
@@ -1100,7 +1100,7 @@ plink2 \
 done
 
 cd /scratch/ys98038/genotype20221007/Top_strand/W8_Philibert_Project_011_Top/
-  
+
 ################## Convert to vcf ##################
 for i in ${chr[@]}
 do
@@ -1112,7 +1112,7 @@ plink2 \
 done
 
 cd /scratch/ys98038/genotype20221007/Top_strand/W5_Philibert2_Project_006_Top/
-  
+
 ################## Convert to vcf ##################
 for i in ${chr[@]}
 do
@@ -1134,7 +1134,7 @@ done
 #SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
 #SBATCH --ntasks=1                      # 1 task (process) for below commands
 #SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
-#SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
 #SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
 #SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
 #SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
@@ -1143,103 +1143,118 @@ done
 cd /scratch/ys98038/genotype20221007/
 # mkdir Imputation\ results/
 # cd Imputation\ results/
-  
-mkdir Genotype_20230119
-cd Genotype_20230119
 
-mkdir W8_H5-H8_Top_GDAD2_NCBI_38
-cd W8_H5-H8_Top_GDAD2_NCBI_38
-wget https://imputation.biodatacatalyst.nhlbi.nih.gov/share/results/95c02faa2709617e29be2a4551f842dc333778f6d52cf1c8e6aa8da2152dd70c/qcreport.html
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805168/5cc7ad2b68c7ca7924c880da4cf90d33cded73993b3b0f811eee5fd0ae42c958 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805170/cdb866c88a753945704fb57cdb0869e350d0c04b14c86813369d3317a2482596 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805171/ce4c6ddb5152bf60188779f266a1963f32abc5279d34b4de58e5a907530ddd3f | bash
+mkdir Genotype_20230210
+cd Genotype_20230210
+
+mkdir W8_A1-H4_Top_GDAD2_NCBI_38
+cd W8_A1-H4_Top_GDAD2_NCBI_38
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825793/05c6f3282eb73502804ca3f074382731288b68375909d01a91235e4d3f91c769 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825797/ffefb0bed86865ca7dbd92b17018c2c1c24027c6f9fc67d32cf4dac575581080 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825799/8a9fef32c0e41eea713ff8a423f04a7a3966f67893f4ad84acfa51abc9207d05 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825800/ebfc25f0731b6ffcf0465e264b0a0083ea3d5b454eedcadd3f85efcb4adea74b | bash
 
 mkdir ../W8_A9-H12_Top_GDAD2_NCBI_38
 cd ../W8_A9-H12_Top_GDAD2_NCBI_38
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805142/d3953ff3c0ae5ae0118a32b11b6ab9004059c08dfd6ea8c66e8072e60913d605 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805146/82a8653ddabe69e0c736e6509b72c1f8beadc8b74c2de7049d7bd114fa40f0f8 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805148/d5617d2c11de1d0d00a0fe7f930ea8b0f2d1a2530a05f28f2247af8119d8e84c | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805149/d60a3718018a5d0142a667c30dd59212ce1173ead72b8a82c7f7464ba00e3112 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825815/b90a87a1c40256d226ccd977932f54e926e50e83f9b2fc7101d7614fbe413950 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825819/1dee25fc58ed32c1382ae58b387d3493b22aa3761ac8ff630c91c51d1bc10cfb | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825821/759d6889237060f385ad00501982cbc4f01c38ead37a08a37bea361dadd978c1 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825822/7238dff76ce17b5984b140e13c10987e0bf079f21c2bf5d67ce6b5bf7a6ce58d | bash
 
-mkdir ../W5_Philibert2_Project_006_Top_GDAD2_NCBI_37
-cd ../W5_Philibert2_Project_006_Top_GDAD2_NCBI_37
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/804944/b051329ead837a49b0667a8da3088e2bee3e0cb7d737d3bce29b09a14f5e754e | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/804948/abee66a86cd42f4917076419a8a92bf74a71d8938eb25fa818f2e62d09df6e50 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/804950/b8fd9a5b98933933e89cf90f5f58063cf3401d1c6c8b65dbfe19deb60159f340 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/804951/cc61c93e9701d6606fc86e49de97f8a3c1223072094e2bcd913089513199cbe0 | bash
+mkdir ../W8_H5-H8_Top_GDAD2_NCBI_38
+cd ../W8_H5-H8_Top_GDAD2_NCBI_38
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825837/d6079147031b4b92d4fa4f8496598755d8e00f42888a4a38c7bab1d36f9d842a | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825841/3114e22026e2a6bf142a627553198f34554925db7718061e8d72ec4873710b63 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825843/e9d351914b284e9200046ebd646859c20a4c4e8e03a1db8b300bc40ace166e85 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825844/7f5534a28617a59bf9817924f9b5b120f714b7c0dcb19e8a71613e48d1d2ed3b | bash
 
 mkdir ../W8_Philibert_Project_011_Top_GDAD2_NCBI_37
 cd ../W8_Philibert_Project_011_Top_GDAD2_NCBI_37
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805010/fe854a2eed5e8dccc60b1588c4bb4e4ace6dd43d15417d0046dbc134eeb4f2b5 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805014/a3e6cc251e1ce94427a47766ba4ffbf7921ccac0065537bac8f9ee23d9dc1467 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805016/5f41d029ae3d157f6f013b5646edb810e333f03b52bc69a4fafe334b5b4cb60a | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805017/17ce5aa385214b5ba15c57957219f3237edadf47814209b47e51a64fd918b3cd | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825925/20f3a613301f46c47b1c76dc56147c4a32a29a6910668522ac3ad0c4dc8dbc95 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825929/eb32eb194622a41732a8c45579ab38d6088b79a8697e2e97f9b530f7bdd98300 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825931/293329c3d36fffb5efef32166e70248f027287580d55bda80e04c6917e09e334 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825932/4f046278d7cea5277ff06cdaeb50c84cb848b4c709ea3a9df3ea9e0b48eb0240 | bash
 
-mkdir ../W8_A1-H4_Top_GDAD2_NCBI_38
-cd ../W8_A1-H4_Top_GDAD2_NCBI_38
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805032/9f1c38d0004393a47dac621035f926a3f1ed81aecf59985dd333b193efc07d95 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805036/457d29e4fcdf1de23343899a99e2027c9ce9cbe0d7193ef5c1c86a6e3c82a50b | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805038/6e85741859e355884067ca44bc38f23cca1d0b933d0bf4eecd79fff4d7d5453d | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/805039/1ffd915e39c9d175bea6506404aede66a0db2211556eb8a9fbaaf259ddf85f4f | bash
+mkdir ../W5_Philibert2_Project_006_Top_GDAD2_NCBI_37
+cd ../W5_Philibert2_Project_006_Top_GDAD2_NCBI_37
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825947/4aa5b4d291793a65399335a4dcd1217c98297a1e0ac2055f889dee41c3ba45b1 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825951/a7c2571442f56b89761eef820da02da4e2337aed4b550e2b47331134610ad2af | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825953/697888b820c430de3f1241b130b9ca01b0544ff361c6adc8a2d93dd9bb2da5b6 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825954/c1ea04c4dffdf27bd0e5431de0bdd2a54dcb925b176ce47ceaedc091ae3c4634 | bash
 
-
+mkdir ../Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38
+cd ../Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825903/273ae4e19934205b149ba2f8dc5d47eb8f94989454c9bdaa6590ee2b9bb36aa3 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825907/6add81ac0c368e3a8a9fc05d8f2a517d6689689c6e84043dd187c18efebfa14f | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825909/32743392a418fb3b45fab659f8c6f0b199e6ca769370e08600173343dafdf1ed | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825910/5b9203a1cf87b60879ef46c12ca817597908ef2f4b1d702cf3dcfc25081c8ada | bash
 
 ml  UnZip/6.0-GCCcore-11.2.0
 
 #chr
-chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
 
-cd /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A1-H4_Top_GDAD2_NCBI_38/
-  
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/W8_A1-H4_Top_GDAD2_NCBI_38/
+
 for i in ${chr[@]}
 do
-unzip -P UO2sNlf9UydZW8 /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A1-H4_Top_GDAD2_NCBI_38/chr_"$i".zip
+unzip -P "v5FKx9DQKz3khn" /scratch/ys98038/genotype20221007/Genotype_20230210/W8_A1-H4_Top_GDAD2_NCBI_38/chr_"$i".zip
 done
 
 # W8_A1-H4_Top_GDAD2_NCBI_38
-# UO2sNlf9UydZW8
+# v5FKx9DQKz3khn
 
-cd /scratch/ys98038/genotype20221007/Genotype_20230119/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/
-  
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/
+
 for i in ${chr[@]}
 do
-unzip -P GWfhCWK1noXc5S  /scratch/ys98038/genotype20221007/Genotype_20230119/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/chr_"$i".zip
+unzip -P "dBg3srHZXji2QG"  /scratch/ys98038/genotype20221007/Genotype_20230210/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/chr_"$i".zip
 done
 
 # W8_Philibert_Project_011_Top_GDAD2_NCBI_37
-# GWfhCWK1noXc5S
+# dBg3srHZXji2QG
 
-cd /scratch/ys98038/genotype20221007/Genotype_20230119/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/
-  
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/
+
 for i in ${chr[@]}
 do
-unzip -P "8M6xO(jxcRkGL{"  /scratch/ys98038/genotype20221007/Genotype_20230119/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/chr_"$i".zip
+unzip -P "CY9tfp5iS4wKtP"  /scratch/ys98038/genotype20221007/Genotype_20230210/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/chr_"$i".zip
 done
 
 # W5_Philibert2_Project_006_Top_GDAD2_NCBI_37
-# 8M6xO(jxcRkGL{
+# CY9tfp5iS4wKtP
 
-cd /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A9-H12_Top_GDAD2_NCBI_38/
-  
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/W8_A9-H12_Top_GDAD2_NCBI_38/
+
 for i in ${chr[@]}
 do
-unzip -P "gQWzj-J0Cbp9pA"  /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A9-H12_Top_GDAD2_NCBI_38/chr_"$i".zip
+unzip -P "KvZp$0rFYjC7Zy"  /scratch/ys98038/genotype20221007/Genotype_20230210/W8_A9-H12_Top_GDAD2_NCBI_38/chr_"$i".zip
 done
 
 # W8_A9-H12_Top_GDAD2_NCBI_38
-# gQWzj-J0Cbp9pA
+# KvZp$0rFYjC7Zy
 
-cd /scratch/ys98038/genotype20221007/Genotype_20230119/W8_H5-H8_Top_GDAD2_NCBI_38/
-  
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/W8_H5-H8_Top_GDAD2_NCBI_38/
+
 for i in ${chr[@]}
 do
-unzip -P Sey9FKONQip5rx  /scratch/ys98038/genotype20221007/Genotype_20230119/W8_H5-H8_Top_GDAD2_NCBI_38/chr_"$i".zip
+unzip -P "elaeCDkK0tKV36"  /scratch/ys98038/genotype20221007/Genotype_20230210/W8_H5-H8_Top_GDAD2_NCBI_38/chr_"$i".zip
 done
 
 # W8_H5-H8_Top_GDAD2_NCBI_38
-# Sey9FKONQip5rx
+# elaeCDkK0tKV36
 
-cd /scratch/ys98038/genotype20221007/Imputation\ results/
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38/
+
+for i in ${chr[@]}
+do
+unzip -P "a9CnaTtKe6[WDh"  /scratch/ys98038/genotype20221007/Genotype_20230210/Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38/chr_"$i".zip
+done
+
+# Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38
+# a9CnaTtKe6[WDh
+
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/
 gunzip */*gz
 
 ####################################################  @@@@@@@@@  Final ! ####################################################
@@ -1256,7 +1271,7 @@ gunzip */*gz
 # /VCF               RefSNP VCF files for GRC (Genome Reference Consortium) human assembly
 # 37 (GCF_000001405.25) and 38 (GCF_000001405.39). Files are compressed
 # by bgzip and with the tabix index.
-cd /scratch/ys98038/genotype20221007/Imputation\ results/
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/
 
 mkdir dbSNP_38_build_155
 cd dbSNP_38_build_155
@@ -1266,10 +1281,11 @@ wget https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/GCF_000001405.39.gz.md5
 wget https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/GCF_000001405.39.gz.tbi
 wget https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/GCF_000001405.39.gz.tbi.md5
 
-# gunzip GCF_000001405.39.gz
+gunzip GCF_000001405.39.gz
+wget https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/GCF_000001405.39.gz
 
-cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/unimputed_W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chrX.vcf.gz
-cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_A1-H4_Top_GDAD2_NCBI_38_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A1-H4_Top_GDAD2_NCBI_38/unimputed_W8_A1-H4_Top_GDAD2_NCBI_38_chrX.vcf.gz
-cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_A9-H12_Top_GDAD2_NCBI_38_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A9-H12_Top_GDAD2_NCBI_38/unimputed_W8_A9-H12_Top_GDAD2_NCBI_38_chrX.vcf.gz
-cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_H5-H8_Top_GDAD2_NCBI_38_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_H5-H8_Top_GDAD2_NCBI_38/unimputed_W8_H5-H8_Top_GDAD2_NCBI_38_chrX.vcf.gz
-cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/unimputed_W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chrX.vcf.gz
+# cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/unimputed_W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chrX.vcf.gz
+# cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_A1-H4_Top_GDAD2_NCBI_38_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A1-H4_Top_GDAD2_NCBI_38/unimputed_W8_A1-H4_Top_GDAD2_NCBI_38_chrX.vcf.gz
+# cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_A9-H12_Top_GDAD2_NCBI_38_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_A9-H12_Top_GDAD2_NCBI_38/unimputed_W8_A9-H12_Top_GDAD2_NCBI_38_chrX.vcf.gz
+# cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_H5-H8_Top_GDAD2_NCBI_38_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_H5-H8_Top_GDAD2_NCBI_38/unimputed_W8_H5-H8_Top_GDAD2_NCBI_38_chrX.vcf.gz
+# cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/unimputed_W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chrX.vcf.gz

@@ -1291,3 +1291,36 @@ wget https://ftp.ncbi.nlm.nih.gov/snp/latest_release/VCF/GCF_000001405.40.gz
 # cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_H5-H8_Top_GDAD2_NCBI_38_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_H5-H8_Top_GDAD2_NCBI_38/unimputed_W8_H5-H8_Top_GDAD2_NCBI_38_chrX.vcf.gz
 # cp /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/gz_files/top/prepare_vcf_gz_011823/W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chrX.vcf.gz /scratch/ys98038/genotype20221007/Genotype_20230119/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/unimputed_W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chrX.vcf.gz
 
+####################################################  @@@@@@@@@  Merge ! ####################################################
+####################################################  @@@@@@@@@  Merge ! ####################################################
+####################################################  @@@@@@@@@  Merge ! ####################################################
+
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/
+  
+# awk '{if($0 !~ /^#/) print $1}' GCF_000001405.40|sort|uniq
+
+  
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/
+
+ml  BCFtools/1.15.1-GCC-10.2.0
+
+bcftools --help rename-chrs
+bcftools --help merge
+
+--rename-chrs
+####################################################  @@@@@@@@@  Merge ! ####################################################
+####################################################  @@@@@@@@@  Merge ! ####################################################
+####################################################  @@@@@@@@@  Merge ! ####################################################

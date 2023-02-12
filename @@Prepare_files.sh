@@ -1331,6 +1331,85 @@ bcftools annotate  \
 #SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/
+
+ml tabix/0.2.6-GCCcore-8.3.0
+
+#chr
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_A1-H4_Top_GDAD2_NCBI_38/
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+chr"$i".dose.vcf > \
+chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_H5-H8_Top_GDAD2_NCBI_38/
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+chr"$i".dose.vcf > \
+chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_A9-H12_Top_GDAD2_NCBI_38/
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+chr"$i".dose.vcf > \
+chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+chr"$i".dose.vcf > \
+chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+chr"$i".dose.vcf > \
+chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38/
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+chr"$i".dose.vcf > \
+chr"$i".dose.vcf.gz
+done
+
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=20               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/
   
 mkdir VCF_results_0212
 
@@ -1346,8 +1425,8 @@ do
 bcftools annotate  \
 -c CHROM,POS,ID,REF,ALT  \
 -a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
--o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A1-H4_Top_GDAD2_NCBI_38_chr_"$i".dose.vcf  \
-chr_"$i".dose.vcf
+-o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".dose.vcf  \
+chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_H5-H8_Top_GDAD2_NCBI_38/
@@ -1357,8 +1436,8 @@ do
 bcftools annotate  \
 -c CHROM,POS,ID,REF,ALT  \
 -a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
--o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_H5-H8_Top_GDAD2_NCBI_38_chr_"$i".dose.vcf  \
-chr_"$i".dose.vcf
+-o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".dose.vcf  \
+chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_A9-H12_Top_GDAD2_NCBI_38/
@@ -1368,8 +1447,8 @@ do
 bcftools annotate  \
 -c CHROM,POS,ID,REF,ALT  \
 -a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
--o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A9-H12_Top_GDAD2_NCBI_38_chr_"$i".dose.vcf  \
-chr_"$i".dose.vcf
+-o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".dose.vcf  \
+chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/
@@ -1379,8 +1458,8 @@ do
 bcftools annotate  \
 -c CHROM,POS,ID,REF,ALT  \
 -a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
--o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr_"$i".dose.vcf  \
-chr_"$i".dose.vcf
+-o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i".dose.vcf  \
+chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/
@@ -1390,8 +1469,8 @@ do
 bcftools annotate  \
 -c CHROM,POS,ID,REF,ALT  \
 -a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
--o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr_"$i".dose.vcf  \
-chr_"$i".dose.vcf
+-o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf  \
+chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38/
@@ -1401,8 +1480,8 @@ do
 bcftools annotate  \
 -c CHROM,POS,ID,REF,ALT  \
 -a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
--o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr_"$i".dose.vcf  \
-chr_"$i".dose.vcf
+-o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".dose.vcf  \
+chr"$i".dose.vcf.gz
 done
 
 # bcftools --help rename-chrs

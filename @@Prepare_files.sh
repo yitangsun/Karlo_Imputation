@@ -1156,10 +1156,10 @@ curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825800/ebfc25f0731
 
 mkdir ../W8_A9-H12_Top_GDAD2_NCBI_38
 cd ../W8_A9-H12_Top_GDAD2_NCBI_38
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825815/b90a87a1c40256d226ccd977932f54e926e50e83f9b2fc7101d7614fbe413950 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825819/1dee25fc58ed32c1382ae58b387d3493b22aa3761ac8ff630c91c51d1bc10cfb | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825821/759d6889237060f385ad00501982cbc4f01c38ead37a08a37bea361dadd978c1 | bash
-curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/825822/7238dff76ce17b5984b140e13c10987e0bf079f21c2bf5d67ce6b5bf7a6ce58d | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/830011/70dbad727f0ae146b4f004ee438ea78788b66e1b658799e6bc8e4e8cc46ec6e7 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/830015/134d938670ef2a136bad0684b9f98d4b92597422ad1ed004efdd4b8ea97a00e7 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/830017/53b55ef9106c7df55baa9a7668a26a597081cff5a080d3b167a760006e79b261 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/830018/ffae13ffef8e37840c9c343c709cf6de982e96035a22ee2938283ef6ba797a12 | bash
 
 mkdir ../W8_H5-H8_Top_GDAD2_NCBI_38
 cd ../W8_H5-H8_Top_GDAD2_NCBI_38
@@ -1228,11 +1228,11 @@ cd /scratch/ys98038/genotype20221007/Genotype_20230210/W8_A9-H12_Top_GDAD2_NCBI_
 
 for i in ${chr[@]}
 do
-unzip -P "KvZp$0rFYjC7Zy"  /scratch/ys98038/genotype20221007/Genotype_20230210/W8_A9-H12_Top_GDAD2_NCBI_38/chr_"$i".zip
+unzip -P "ufHnPC3r$usV9Y"  /scratch/ys98038/genotype20221007/Genotype_20230210/W8_A9-H12_Top_GDAD2_NCBI_38/chr_"$i".zip
 done
 
 # W8_A9-H12_Top_GDAD2_NCBI_38
-# KvZp$0rFYjC7Zy
+# ufHnPC3r$usV9Y
 
 cd /scratch/ys98038/genotype20221007/Genotype_20230210/W8_H5-H8_Top_GDAD2_NCBI_38/
 
@@ -1405,6 +1405,112 @@ bgzip  \
 -c  \
 chr"$i".dose.vcf > \
 chr"$i".dose.vcf.gz
+done
+
+
+# zcat chr1.dose.vcf.gz | bgzip -c > Test.new.chr1.dose.vcf.gz && tabix Test.new.chr1.dose.vcf.gz
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=20               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/
+
+ml  BCFtools/1.15.1-GCC-10.2.0
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
+# chr=(1)
+
+ml tabix/0.2.6-GCCcore-8.3.0
+
+zcat GRCh38.dbSNP156.vcf.gz | bgzip -c > New.GRCh38.dbSNP156.vcf.gz && tabix New.GRCh38.dbSNP156.vcf.gz
+
+# zcat chr1.dose.vcf.gz | bgzip -c > Test.new.chr1.dose.vcf.gz && tabix Test.new.chr1.dose.vcf.gz
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=20               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+ml tabix/0.2.6-GCCcore-8.3.0
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/
+
+#chr
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_A1-H4_Top_GDAD2_NCBI_38/
+#### gz files
+for i in ${chr[@]}
+do
+zcat  \
+chr"$i".dose.vcf.gz | bgzip \
+-c > New.chr"$i".dose.vcf.gz && \
+tabix New.chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_H5-H8_Top_GDAD2_NCBI_38/
+#### gz files
+for i in ${chr[@]}
+do
+zcat  \
+chr"$i".dose.vcf.gz | bgzip \
+-c > New.chr"$i".dose.vcf.gz && \
+tabix New.chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_A9-H12_Top_GDAD2_NCBI_38/
+#### gz files
+for i in ${chr[@]}
+do
+zcat  \
+chr"$i".dose.vcf.gz | bgzip \
+-c > New.chr"$i".dose.vcf.gz && \
+tabix New.chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/
+#### gz files
+for i in ${chr[@]}
+do
+zcat  \
+chr"$i".dose.vcf.gz | bgzip \
+-c > New.chr"$i".dose.vcf.gz && \
+tabix New.chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/
+#### gz files
+for i in ${chr[@]}
+do
+zcat  \
+chr"$i".dose.vcf.gz | bgzip \
+-c > New.chr"$i".dose.vcf.gz && \
+tabix New.chr"$i".dose.vcf.gz
+done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38/
+#### gz files
+for i in ${chr[@]}
+do
+zcat  \
+chr"$i".dose.vcf.gz | bgzip \
+-c > New.chr"$i".dose.vcf.gz && \
+tabix New.chr"$i".dose.vcf.gz
 done
 
 

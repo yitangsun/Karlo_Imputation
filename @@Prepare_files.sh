@@ -1532,8 +1532,8 @@ mkdir VCF_results_0212
 ml  BCFtools/1.15.1-GCC-10.2.0
 
 #chr
-# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
-chr=(1)
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
+# chr=(1)
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_A1-H4_Top_GDAD2_NCBI_38/
 
@@ -1546,10 +1546,10 @@ ml tabix/0.2.6-GCCcore-8.3.0
 for i in ${chr[@]}
 do
 bcftools annotate  \
--c POS  \
--a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
+-c CHROM,POS,ID  \
+-a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/New.GRCh38.dbSNP156.vcf.gz   \
 -o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".dose.vcf  \
-Test.new.chr1.dose.vcf.gz
+New.chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_H5-H8_Top_GDAD2_NCBI_38/
@@ -1557,10 +1557,10 @@ cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_H5-H8_Top_GDAD2_N
 for i in ${chr[@]}
 do
 bcftools annotate  \
--c CHROM,POS,ID,REF,ALT  \
--a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
+-c CHROM,POS,ID  \
+-a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/New.GRCh38.dbSNP156.vcf.gz   \
 -o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".dose.vcf  \
-chr"$i".dose.vcf.gz
+New.chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_A9-H12_Top_GDAD2_NCBI_38/
@@ -1568,10 +1568,10 @@ cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_A9-H12_Top_GDAD2_
 for i in ${chr[@]}
 do
 bcftools annotate  \
--c CHROM,POS,ID,REF,ALT  \
--a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
+-c CHROM,POS,ID  \
+-a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/New.GRCh38.dbSNP156.vcf.gz   \
 -o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".dose.vcf  \
-chr"$i".dose.vcf.gz
+New.chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_Philibert_Project_011_Top_GDAD2_NCBI_37/
@@ -1579,10 +1579,10 @@ cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_Philibert_Project
 for i in ${chr[@]}
 do
 bcftools annotate  \
--c CHROM,POS,ID,REF,ALT  \
--a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
+-c CHROM,POS,ID  \
+-a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/New.GRCh38.dbSNP156.vcf.gz   \
 -o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i".dose.vcf  \
-chr"$i".dose.vcf.gz
+New.chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37/
@@ -1590,10 +1590,10 @@ cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W5_Philibert2_Projec
 for i in ${chr[@]}
 do
 bcftools annotate  \
--c CHROM,POS,ID,REF,ALT  \
--a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
+-c CHROM,POS,ID  \
+-a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/New.GRCh38.dbSNP156.vcf.gz   \
 -o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf  \
-chr"$i".dose.vcf.gz
+New.chr"$i".dose.vcf.gz
 done
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38/
@@ -1601,10 +1601,10 @@ cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/Gibbons_Project.Stra
 for i in ${chr[@]}
 do
 bcftools annotate  \
--c CHROM,POS,REF,ALT  \
--a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/GRCh38.dbSNP156.vcf.gz   \
+-c CHROM,POS,ID  \
+-a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/New.GRCh38.dbSNP156.vcf.gz   \
 -o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".dose.vcf  \
-chr"$i".dose.vcf.gz
+New.chr"$i".dose.vcf.gz
 done
 
 # bcftools --help rename-chrs
@@ -1617,8 +1617,6 @@ done
 ####################################################  @@@@@@@@@  merge ! ####################################################
 ####################################################  @@@@@@@@@  merge ! ####################################################
 ####################################################  @@@@@@@@@  merge ! ####################################################
-
-zcat chr1.dose.vcf.gz | bgzip -c > Test.new.chr1.dose.vcf.gz && tabix Test.new.chr1.dose.vcf.gz
 
 #!/bin/bash
 #SBATCH --job-name=test         # Job name
@@ -1650,14 +1648,12 @@ ml tabix/0.2.6-GCCcore-8.3.0
 for i in ${chr[@]}
 do
 bcftools merge  \
-/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_A1-H4_Top_GDAD2_NCBI_38/Test.new.chr"$i".dose.vcf.gz   \
-/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/W8_H5-H8_Top_GDAD2_NCBI_38/Test.new.chr"$i".dose.vcf.gz   \
-> /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Top_GDAD2_chr"$i".dose.vcf.gz
+/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".dose.vcf  \
+/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".dose.vcf  \
+/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".dose.vcf  \
+/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i".dose.vcf  \
+> /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Top_GDAD2_chr"$i".dose.vcf
 done
-
-
-
-
 
 ####################################################  @@@@@@@@@  merge ! ####################################################
 ####################################################  @@@@@@@@@  merge ! ####################################################

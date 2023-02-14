@@ -1663,10 +1663,99 @@ done
 ####################################################  @@@@@@@@@  gzipped ! ####################################################
 ####################################################  @@@@@@@@@  gzipped ! ####################################################
 
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=batch               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=20               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+ml tabix/0.2.6-GCCcore-8.3.0
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/
+#chr
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+W8_Top_GDAD2_chr"$i".dose.vcf > \
+W8_Top_GDAD2_chr"$i".dose.vcf.gz && \
+tabix W8_Top_GDAD2_chr"$i".dose.vcf.gz
+done
+
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf > \
+W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz && \
+tabix W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz
+done
+
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".dose.vcf > \
+Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".dose.vcf.gz && \
+tabix Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".dose.vcf.gz
+done
+
 ####################################################  @@@@@@@@@  gzipped ! ####################################################
 ####################################################  @@@@@@@@@  gzipped ! ####################################################
 ####################################################  @@@@@@@@@  gzipped ! ####################################################
 
-####################################################  @@@@@@@@@  PRS?  ! ####################################################
-####################################################  @@@@@@@@@  PRS?  ! ####################################################
-####################################################  @@@@@@@@@  PRS?  ! ####################################################
+####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=20               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+# cd $SLURM_SUBMIT_DIR
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(19)
+################## Convert to vcf ##################
+plink2 \
+--vcf W8_Top_GDAD2_chr"$i".dose.vcf.gz \
+--recode ped \
+--snps rs429358, rs7412 \
+--out W8_Top_GDAD2_chr"$i"
+
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--recode ped \
+--snps rs429358, rs7412 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+
+plink2 \
+--vcf Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".dose.vcf.gz \
+--recode ped \
+--snps rs429358, rs7412 \
+--out Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i"
+
+####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################

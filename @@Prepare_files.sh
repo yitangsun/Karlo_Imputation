@@ -1744,6 +1744,8 @@ bcftools merge  \
 > /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Top_GDAD2_chr"$i".dose.vcf
 done
 
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/
+
 #### gz files
 for i in ${chr[@]}
 do
@@ -1791,6 +1793,8 @@ bcftools merge  \
 > /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Top_GDAD2_chr"$i".dose.vcf
 done
 
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/
+  
 #### gz files
 for i in ${chr[@]}
 do

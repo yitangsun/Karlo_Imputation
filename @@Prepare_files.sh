@@ -2108,7 +2108,7 @@ done
 
 #!/bin/bash
 #SBATCH --job-name=test         # Job name
-#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --partition=batch               # Partition name (batch, highmem_p, or gpu_p)
 #SBATCH --ntasks=1                      # 1 task (process) for below commands
 #SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
 #SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
@@ -2158,7 +2158,7 @@ done
 
 #!/bin/bash
 #SBATCH --job-name=test         # Job name
-#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --partition=batch               # Partition name (batch, highmem_p, or gpu_p)
 #SBATCH --ntasks=1                      # 1 task (process) for below commands
 #SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
 #SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit

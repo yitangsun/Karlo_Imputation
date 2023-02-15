@@ -1812,6 +1812,7 @@ done
 ####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
 ####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
 ####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+
 #!/bin/bash
 #SBATCH --job-name=test         # Job name
 #SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
@@ -1834,48 +1835,66 @@ chr=(19)
 ################## Convert to vcf ##################
 ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 
+for i in ${chr[@]}
+do
 plink2 \
 --vcf W8_Top_GDAD2_chr"$i".dose.vcf.gz \
 --make-bed \
 --snps rs429358, rs7412 \
 --out W8_Top_GDAD2_chr"$i"
+done
 
 module load PLINK/1.9b_6-24-x86_64
 
+for i in ${chr[@]}
+do
 plink \
 --bfile W8_Top_GDAD2_chr"$i" \
 --recode ped \
 --out W8_Top_GDAD2_chr"$i"
+done
 
 ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 
+for i in ${chr[@]}
+do
 plink2 \
 --vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
 --make-bed \
 --snps rs429358, rs7412 \
 --out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
 
 module load PLINK/1.9b_6-24-x86_64
 
+for i in ${chr[@]}
+do
 plink \
 --bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
 --recode ped \
 --out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
 
 ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
 
+for i in ${chr[@]}
+do
 plink2 \
 --vcf Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".dose.vcf.gz \
 --make-bed \
 --snps rs429358, rs7412 \
 --out Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i"
+done
 
 module load PLINK/1.9b_6-24-x86_64
 
+for i in ${chr[@]}
+do
 plink \
 --bfile Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i" \
 --recode ped \
 --out Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i"
+done
 
 ####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
 ####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################

@@ -138,3 +138,10 @@ mv chr*.vcf.gz Data/
 
 6. Download results & unzip files using 7-zip
 
+# Plink Input Report Parameters
+
+# Use the top strand
+
+# Remove zeroed SNPs from the report.
+
+

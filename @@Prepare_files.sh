@@ -1714,6 +1714,9 @@ done
 #SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
 #SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
 #SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+#SBATCH --array=1-22
+
+chr=$SLURM_ARRAY_TASK_ID
 
 cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/
 
@@ -1722,7 +1725,7 @@ mkdir VCF_results_0212
 ml  BCFtools/1.15.1-GCC-10.2.0
 
 #chr
-chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22)
 # chr=(1)
 
 ml tabix/0.2.6-GCCcore-8.3.0
@@ -1746,9 +1749,56 @@ for i in ${chr[@]}
 do
 bgzip  \
 -c  \
-W8_A1-W8_Top_GDAD2_chr"$i".dose.vcf > \
-W8_A1-W8_Top_GDAD2_chr"$i".dose.vcf.gz && \
-tabix W8_A1-W8_Top_GDAD2_chr"$i".dose.vcf.gz
+W8_Top_GDAD2_chr"$i".dose.vcf > \
+W8_Top_GDAD2_chr"$i".dose.vcf.gz && \
+tabix W8_Top_GDAD2_chr"$i".dose.vcf.gz
+done
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=batch               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=20               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/
+
+mkdir VCF_results_0212
+
+ml  BCFtools/1.15.1-GCC-10.2.0
+
+#chr
+chr=(X)
+# chr=(1)
+
+ml tabix/0.2.6-GCCcore-8.3.0
+
+# zcat Test.chr1.dose.vcf.gz | bgzip -c > Test.new.chr1.dose.vcf.gz && tabix Test.new.chr1.dose.vcf.gz
+
+# bcftools index Test.chr1.dose.vcf.gz
+
+for i in ${chr[@]}
+do
+bcftools merge  \
+/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Philibert_Project_011_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz  \
+/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A1-H4_Top_GDAD2_NCBI_38_chr"$i".dose.vcf.gz  \
+/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_H5-H8_Top_GDAD2_NCBI_38_chr"$i".dose.vcf.gz  \
+/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".dose.vcf.gz  \
+> /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Top_GDAD2_chr"$i".dose.vcf
+done
+
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+W8_Top_GDAD2_chr"$i".dose.vcf > \
+W8_Top_GDAD2_chr"$i".dose.vcf.gz && \
+tabix W8_Top_GDAD2_chr"$i".dose.vcf.gz
 done
 
 ####################################################  @@@@@@@@@  merge ! ####################################################

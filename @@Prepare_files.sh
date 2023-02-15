@@ -1738,22 +1738,49 @@ cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/
 # chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
 chr=(19)
 ################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
 plink2 \
 --vcf W8_Top_GDAD2_chr"$i".dose.vcf.gz \
---recode ped \
+--make-bed \
 --snps rs429358, rs7412 \
 --out W8_Top_GDAD2_chr"$i"
 
+module load PLINK/1.9b_6-24-x86_64
+
+plink \
+--bfile W8_Top_GDAD2_chr"$i" \
+--recode ped \
+--out W8_Top_GDAD2_chr"$i"
+
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
 plink2 \
 --vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
---recode ped \
+--make-bed \
 --snps rs429358, rs7412 \
 --out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
 
+module load PLINK/1.9b_6-24-x86_64
+
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
 plink2 \
 --vcf Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i".dose.vcf.gz \
---recode ped \
+--make-bed \
 --snps rs429358, rs7412 \
+--out Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i"
+
+module load PLINK/1.9b_6-24-x86_64
+
+plink \
+--bfile Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i" \
+--recode ped \
 --out Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38_chr"$i"
 
 ####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################

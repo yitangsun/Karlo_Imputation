@@ -1899,3 +1899,351 @@ done
 ####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
 ####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
 ####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+
+####################################################  @@@@@@@@@  Beach_Project_004  ! ####################################################
+####################################################  @@@@@@@@@  Beach_Project_004  ! ####################################################
+####################################################  @@@@@@@@@  Beach_Project_004  ! ####################################################
+
+#
+cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/
+##### https://www.strand.org.uk/
+# Genotyping chips strand and build files
+### GDA-8v1-0_D2 37
+wget https://www.strand.org.uk/topStrand/GDA-8v1-0_D2-b37-strand.zip
+### GDA-8v1-0_D2 37
+wget https://www.strand.org.uk/topStrand/GDA-8v1-0_D2-b38-strand.zip
+### GDA-8v1-0_A1 37 (old)
+wget https://www.strand.org.uk/topStrand/GDA-8v1-0_A1-b37-strand.zip
+### GDA-8v1-0_D1 37 (old)
+wget https://www.strand.org.uk/topStrand/GDA-8v1-0_D1-b37-strand.zip
+### GDA-8v1-0_A1_2004 37 (old)
+wget https://www.strand.org.uk/topStrand/GDA_PGx-8v1-0_20042614_A1-b37-strand.zip
+
+ml  UnZip/6.0-GCCcore-11.2.0
+unzip GDA-8v1-0_D2-b37-strand.zip 
+unzip GDA-8v1-0_D2-b38-strand.zip
+unzip GDA-8v1-0_A1-b37-strand.zip
+unzip GDA-8v1-0_D1-b37-strand.zip 
+unzip GDA_PGx-8v1-0_20042614_A1-b37-strand.zip
+
+# wget https://www.well.ox.ac.uk/~wrayner/strand/update_build.sh
+wget https://www.strand.org.uk/update_build.sh
+
+chmod 777 update_build*
+  
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+module load PLINK/1.9b_6-24-x86_64
+
+# cd $SLURM_SUBMIT_DIR
+cd /scratch/ys98038/genotype20221007/Top_strand/Beach_Project_004_Top/
+################## Convert to bfiles ##################
+plink \
+--file Beach_Project_004_Top \
+--make-bed \
+--out Beach_Project_004_Top
+
+####### Top
+###### @@@@@ Check 37 or 38
+/scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/update_build.sh \
+/scratch/ys98038/genotype20221007/Top_strand/Beach_Project_004_Top/Beach_Project_004_Top \
+/scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/GDA-8v1-0_D2-b37.strand \
+/scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/Beach_Project_004_Top_GDAD2_NCBI_37
+
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+# cd $SLURM_SUBMIT_DIR
+cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/
+
+#chr
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 XY)
+
+################## Convert to vcf ################## Top
+for i in ${chr[@]}
+do
+plink2 \
+--bfile Beach_Project_004_Top_GDAD2_NCBI_37 \
+--chr "$i" \
+--recode vcf-4.2 \
+--out VCF42_Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+# cd $SLURM_SUBMIT_DIR
+cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/
+
+#chr
+chr=(X)
+
+################## Convert to vcf ################## Top
+for i in ${chr[@]}
+do
+plink2 \
+--bfile Beach_Project_004_Top_GDAD2_NCBI_37 \
+--chr "$i" \
+--set-hh-missing \
+--make-bed \
+--out VCF42_Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+for i in ${chr[@]}
+do
+plink2 \
+--bfile VCF42_Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i" \
+--chr "$i" \
+--recode vcf-4.2 \
+--out VCF42_Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+# Change chr*
+# awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' all_phase3.pvar > all_hg37_snps.pvar
+mkdir backup_vcf
+cp *Top* backup_vcf/
+  
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+#SBATCH --array=1-22
+
+chr=$SLURM_ARRAY_TASK_ID
+
+ml tabix/0.2.6-GCCcore-8.3.0
+
+cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/
+  
+ # chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 XY)
+
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+VCF42_Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".vcf > \
+VCF42_Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".vcf.gz
+done
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+cd /scratch/ys98038/genotype20221007/PLINK_GenomeStudio/VCF_files/final_gz_files/Strand/
+
+ml tabix/0.2.6-GCCcore-8.3.0
+
+chr=(X)
+
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+VCF42_Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".vcf > \
+VCF42_Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".vcf.gz
+done
+
+mkdir gz_files/top/VCF42_prepare_vcf_gz_011823
+mv *.gz gz_files/top/VCF42_prepare_vcf_gz_011823
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+cd /scratch/ys98038/genotype20221007/
+# mkdir Imputation\ results/
+# cd Imputation\ results/
+
+#mkdir Genotype_20230210
+cd Genotype_20230210
+
+mkdir Beach_Project_004_Top_GDAD2_NCBI_37
+cd Beach_Project_004_Top_GDAD2_NCBI_37
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/831903/1df685b92c45f098c6c028ab7a72becb12c821d70c02c6fb6a4fb92ae425839a | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/831907/6a91e4ff3aad7211bdf05a3306636aba20bc578506b0edeb73e4b19dc954a408 | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/831909/c16621214b92f90994ba25d1d86ab7ed627bfa23b3a80b2341e13b9df29a849c | bash
+curl -sL https://imputation.biodatacatalyst.nhlbi.nih.gov/get/831910/055e0ff46c618975a14f6abaf6a466f91f7c015f7c4890ded3432763edaa04ae | bash
+
+ml  UnZip/6.0-GCCcore-11.2.0
+
+#chr
+chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
+
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/
+
+for i in ${chr[@]}
+do
+unzip -P "inoAiPWsrP68Qy" /scratch/ys98038/genotype20221007/Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/chr_"$i".zip
+done
+
+# Beach_Project_004_Top_GDAD2_NCBI_37
+# inoAiPWsrP68Qy
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+#SBATCH --array=1-22
+
+chr=$SLURM_ARRAY_TASK_ID
+
+ml tabix/0.2.6-GCCcore-8.3.0
+
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/
+  
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 XY)
+
+#### gz files
+for i in ${chr[@]}
+do
+zcat  \
+chr"$i".dose.vcf.gz | bgzip \
+-c > New.chr"$i".dose.vcf.gz && \
+tabix New.chr"$i".dose.vcf.gz
+done
+
+ml  BCFtools/1.15.1-GCC-10.2.0
+
+for i in ${chr[@]}
+do
+bcftools annotate  \
+-c CHROM,POS,ID  \
+-a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/New.GRCh38.dbSNP156.vcf.gz   \
+-o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf  \
+New.chr"$i".dose.vcf.gz
+done
+
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf > \
+Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz && \
+tabix Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz
+done
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=8               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+cd /scratch/ys98038/genotype20221007/Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/
+
+ml tabix/0.2.6-GCCcore-8.3.0
+
+chr=(X)
+
+#### gz files
+for i in ${chr[@]}
+do
+zcat  \
+chr"$i".dose.vcf.gz | bgzip \
+-c > New.chr"$i".dose.vcf.gz && \
+tabix New.chr"$i".dose.vcf.gz
+done
+
+ml  BCFtools/1.15.1-GCC-10.2.0
+
+for i in ${chr[@]}
+do
+bcftools annotate  \
+-c CHROM,POS,ID  \
+-a /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/dbSNP_38_build_156/New.GRCh38.dbSNP156.vcf.gz   \
+-o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf  \
+New.chr"$i".dose.vcf.gz
+done
+
+#### gz files
+for i in ${chr[@]}
+do
+bgzip  \
+-c  \
+Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf > \
+Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz && \
+tabix Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz
+done
+
+####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  Extract SNPs  ! ####################################################
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=20               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+# cd $SLURM_SUBMIT_DIR
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(19)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs429358, rs7412 \
+--out Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i"
+done

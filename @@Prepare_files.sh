@@ -1706,10 +1706,10 @@ done
 
 #!/bin/bash
 #SBATCH --job-name=test         # Job name
-#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --partition=batch               # Partition name (batch, highmem_p, or gpu_p)
 #SBATCH --ntasks=1                      # 1 task (process) for below commands
 #SBATCH --cpus-per-task=20               # CPU core count per task, by default 1 CPU core per task
-#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --mem=110G                       # Memory per node (4GB); by default using M as unit
 #SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
 #SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
 #SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
@@ -1740,7 +1740,6 @@ bcftools merge  \
 /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_A9-H12_Top_GDAD2_NCBI_38_chr"$i".dose.vcf.gz  \
 > /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/W8_Top_GDAD2_chr"$i".dose.vcf
 done
-
 
 #### gz files
 for i in ${chr[@]}

@@ -2251,3 +2251,5 @@ plink \
 --recode ped \
 --out Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i"
 done
+
+

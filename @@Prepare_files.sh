@@ -2082,7 +2082,7 @@ cd /scratch/ys98038/genotype20221007/
 # cd Imputation\ results/
 
 #mkdir Genotype_20230210
-cd Genotype_20230210
+cd Copy_Genotype_20230210
 
 mkdir Beach_Project_004_Top_GDAD2_NCBI_37
 cd Beach_Project_004_Top_GDAD2_NCBI_37
@@ -2096,11 +2096,11 @@ ml  UnZip/6.0-GCCcore-11.2.0
 #chr
 chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X)
 
-cd /scratch/ys98038/genotype20221007/Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/
 
 for i in ${chr[@]}
 do
-unzip -P "inoAiPWsrP68Qy" /scratch/ys98038/genotype20221007/Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/chr_"$i".zip
+unzip -P "inoAiPWsrP68Qy" /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/chr_"$i".zip
 done
 
 # Beach_Project_004_Top_GDAD2_NCBI_37
@@ -2122,7 +2122,7 @@ chr=$SLURM_ARRAY_TASK_ID
 
 ml tabix/0.2.6-GCCcore-8.3.0
 
-cd /scratch/ys98038/genotype20221007/Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/
   
 # chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 XY)
 
@@ -2146,6 +2146,8 @@ bcftools annotate  \
 New.chr"$i".dose.vcf.gz
 done
 
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/
+
 #### gz files
 for i in ${chr[@]}
 do
@@ -2167,7 +2169,7 @@ done
 #SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
 #SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
 
-cd /scratch/ys98038/genotype20221007/Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/Beach_Project_004_Top_GDAD2_NCBI_37/
 
 ml tabix/0.2.6-GCCcore-8.3.0
 
@@ -2192,6 +2194,8 @@ bcftools annotate  \
 -o /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i".dose.vcf  \
 New.chr"$i".dose.vcf.gz
 done
+
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/
 
 #### gz files
 for i in ${chr[@]}

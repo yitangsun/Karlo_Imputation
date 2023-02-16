@@ -7,7 +7,8 @@ Pathway="/scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_02
 
 Batch=c("Gibbons_Project.StrandAligned.rsID_Updated_NCBI_38",
         "W5_Philibert2_Project_006_Top_GDAD2_NCBI_37",
-        "W8_Top_GDAD2")
+        "W8_Top_GDAD2",
+        "Beach_Project_004_Top_GDAD2_NCBI_37")
 
 for (var_num in seq(1:length(Batch))) {
   PED_file <- read.table(paste(Pathway,Batch[var_num],"_chr19.ped",sep = ""), header=F, sep=" ")

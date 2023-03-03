@@ -2252,4 +2252,279 @@ plink \
 --out Beach_Project_004_Top_GDAD2_NCBI_37_chr"$i"
 done
 
+####################################################  @@@@@@@@@  PCR SNPs data for the wave5 dataset Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  PCR SNPs data for the wave5 dataset Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  PCR SNPs data for the wave5 dataset Extract SNPs  ! ####################################################
+
+#!/bin/bash
+#SBATCH --job-name=test         # Job name
+#SBATCH --partition=highmem_p               # Partition name (batch, highmem_p, or gpu_p)
+#SBATCH --ntasks=1                      # 1 task (process) for below commands
+#SBATCH --cpus-per-task=20               # CPU core count per task, by default 1 CPU core per task
+#SBATCH --mem=220G                       # Memory per node (4GB); by default using M as unit
+#SBATCH --time=6-23:00:00               # Time limit hrs:min:sec or days-hours:minutes:seconds
+#SBATCH --output=test.%A_%a.out              # Standard output log, e.g., testBowtie2_12345.out
+#SBATCH --mail-user=ys98038@uga.edu    # Where to send mail
+#SBATCH --mail-type=BEGIN,END,FAIL      # Mail events (BEGIN, END, FAIL, ALL)
+
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+# cd $SLURM_SUBMIT_DIR
+cd /scratch/ys98038/genotype20221007/Copy_Genotype_20230210/VCF_results_0212/
+
+rm *.fam *.bed *.bim *.log *.map *.nosex *.ped *.csv
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(7)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs6977660, rs2523189 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(1)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs11206244 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(1)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs11206244, rs2235544, rs2294512 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(4)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs10493147 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(16)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs2550298 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(6)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs9376165 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(3)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs1976324 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(9)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs10512065 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(20)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs6026565 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+#chr
+# chr=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X XY)
+chr=(8)
+################## Convert to vcf ##################
+ml PLINK/2.00-alpha2.3-x86_64-20210920-dev
+
+for i in ${chr[@]}
+do
+plink2 \
+--vcf W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i".dose.vcf.gz \
+--make-bed \
+--snps rs2252696 \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+module load PLINK/1.9b_6-24-x86_64
+
+for i in ${chr[@]}
+do
+plink \
+--bfile W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i" \
+--recode ped \
+--out W5_Philibert2_Project_006_Top_GDAD2_NCBI_37_chr"$i"
+done
+
+####################################################  @@@@@@@@@  PCR SNPs data for the wave5 dataset Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  PCR SNPs data for the wave5 dataset Extract SNPs  ! ####################################################
+####################################################  @@@@@@@@@  PCR SNPs data for the wave5 dataset Extract SNPs  ! ####################################################
 

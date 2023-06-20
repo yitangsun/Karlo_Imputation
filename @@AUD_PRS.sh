@@ -189,6 +189,6 @@ for (e in c("unweighted","weighted")) {
     dat_tem<-dat_tem%>%select(IID, Total_PRS)
     
     write.table(dat_tem, file= paste(Pathway_out,x,"_AUD_",e,".csv", sep=""), 
-                col.names = T, append = F, row.names = F, quote = T, sep='\t')
+                col.names = T, append = F, row.names = F, quote = F, sep='\t')
   }
 }
